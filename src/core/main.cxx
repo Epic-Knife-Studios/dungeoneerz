@@ -3,7 +3,7 @@
 
 #include "dungeoneerz/game/game.hpp"
 
-using KnifeTech::Dungeoneerz::Game;
+using Dungeoneerz::Game::Game;
 
 Game* game;
 

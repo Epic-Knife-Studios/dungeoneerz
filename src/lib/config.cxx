@@ -1,20 +1,20 @@
 // Dungeoneerz
 // Copyright(c) 2015 Samuel "MrOverkill" Meyers
 
-#include "dungeoneerz/game/game.hpp"
+#include "dungeoneerz/lib/config.hpp"
 
-using Dungeoneerz::Library::Window;
+using std::string;
 
 namespace Dungeoneerz
 {
 
-    namespace Game
+    namespace Library
     {
     
-        Game::Game()
+        Config::Config(string text)
         {
             
-            this->window = new Window();
+            this->text = text;
             
         }
     

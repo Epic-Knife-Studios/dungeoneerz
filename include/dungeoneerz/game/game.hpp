@@ -5,22 +5,24 @@
 
 #include "dungeoneerz/lib/window.hpp"
 
-using KnifeTech::Dungeoneerz::System::Window;
-
-namespace KnifeTech
+using Dungeoneerz::Library::Window;
+    
+namespace Dungeoneerz
 {
-    namespace Dungeoneerz
+    
+    namespace Game
     {
-        
+    
         class Game
         {
             
             private:
                 Window* window;
-        
+
             public:
                 Game();
         };
-        
+    
     }
+    
 }

@@ -3,22 +3,18 @@
 
 #include "dungeoneerz/lib/window.hpp"
 
-namespace KnifeTech
+namespace Dungeoneerz
 {
-
-    namespace Dungeoneerz
+    
+    namespace Library
     {
-        
-        namespace System
+    
+        Window::Window()
         {
-        
-            Window::Window()
-            {
-                
-            }
-        
+            
         }
     
     }
 
 }
+

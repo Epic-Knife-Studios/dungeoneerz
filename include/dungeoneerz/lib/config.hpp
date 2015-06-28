@@ -3,21 +3,30 @@
 
 #pragma once
 
+#include <string>
+
+#include <cstdio>
+
+using std::string;
+
 namespace Dungeoneerz
 {
-        
+    
     namespace Library
     {
     
-        class Window
+        class Config
         {
             
+            private:
+                string text;
+            
             public:
-                Window();
+                Config(string text);
             
         };
-    
+        
     }
-
+    
 }
 

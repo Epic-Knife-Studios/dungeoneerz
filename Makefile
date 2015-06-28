@@ -28,6 +28,9 @@ linux-dev:
 	@echo "[library] Compile : lib/window.cxx"
 	@g++ ${LINUX_FLAGS} ${LIB_INCLUDE} \
 	src/lib/window.cxx -o build/obj/lib.window.o
+	@echo "[library] Compile : lib/config.cxx"
+	@g++ ${LINUX_FLAGS} ${LIB_INCLUDE} \
+	src/lib/config.cxx -o build/obj/lib.config.o
 	@echo "[library] Linking common library..."
 	@g++ -shared build/obj/lib.*.o -o build/lib/libdungeonlib.so ${LIB_LIBS}
 	@echo "[game] Compiling game..."
