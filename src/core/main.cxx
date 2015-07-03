@@ -10,5 +10,8 @@ Game* game;
 int main(int argc, char* argv[])
 {
     game = new Game();
+    game->Start();
+    game->Run();
+    game->Stop();
     return 0;
 }

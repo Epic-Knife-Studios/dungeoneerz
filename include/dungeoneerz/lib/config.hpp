@@ -15,6 +15,19 @@ namespace Dungeoneerz
     namespace Library
     {
     
+        class CfgNode
+        {
+            
+            public:
+                string name;
+                string value;
+                
+                CfgNode(string name, string value);
+                
+                
+            
+        };
+    
         class Config
         {
             
@@ -23,6 +36,8 @@ namespace Dungeoneerz
             
             public:
                 Config(string text);
+                
+                
             
         };
         

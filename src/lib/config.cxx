@@ -11,6 +11,14 @@ namespace Dungeoneerz
     namespace Library
     {
     
+        CfgNode::CfgNode(string name, string value)
+        {
+            
+            this->name = name;
+            this->value = value;
+            
+        }
+    
         Config::Config(string text)
         {
             
