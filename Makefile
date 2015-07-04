@@ -3,51 +3,36 @@
 
 VERSION=0.0.1
 
-GAME_LIBS= -Lbuild/lib \
--ldungeonlib
+GAME_LIBS= -ldungeonlib -shared
 
-CORE_LIBS= ${GAME_LIBS} \
--ldungeongame
+CORE_LIBS= -ldungeonlib -ldungeongame
 
-LIB_LIBS= -Ldependencies/SFML/lib \
--lsfml-system -lsfml-window -lsfml-graphics -lsfml-network -lsfml-audio
+#LIB_LIBS= -Ldependencies/SFML/lib \
+#-lsfml-system -lsfml-window -lsfml-graphics -lsfml-network -lsfml-audio
 
 DUNGEON_INCLUDE= -Iinclude
 
 LIB_INCLUDE= ${DUNGEON_INCLUDE} -Idependencies/SFML/include
 
-LINUX_FLAGS= -c -fPIC -DDOS=LINUX
-
 default:
-	# Targets : linux-dev, linux-release
+	@echo "Targets :"
+	@echo "linux-dev, linux-release"
+	@echo "osx-dev, osx-release"
 
 linux-dev:
 	@echo "Setting up..."
 	@bash build/scripts/linux-precompile.sh
 	@echo "[library] Compiling common library..."
-	@echo "[library] Compile : lib/window.cxx"
-	@g++ ${LINUX_FLAGS} ${LIB_INCLUDE} \
-	src/lib/window.cxx -o build/obj/lib.window.o
-	@echo "[library] Compile : lib/config.cxx"
-	@g++ ${LINUX_FLAGS} ${LIB_INCLUDE} \
-	src/lib/config.cxx -o build/obj/lib.config.o
-	@echo "[library] Compile : lib/logger.cxx"
-	@g++ ${LINUX_FLAGS} ${LIB_INCLUDE} \
-	src/lib/logger.cxx -o build/obj/lib.logger.o
-	@echo "[library] Linking common library..."
-	@g++ -shared build/obj/lib.*.o -o build/lib/libdungeonlib.so ${LIB_LIBS}
+	@bash build/scripts/linux-compile.sh src/lib/window.cxx build/obj/lib.window.o library
+	@bash build/scripts/linux-compile.sh src/lib/config.cxx build/obj/lib.config.o library
+	@bash build/scripts/linux-compile.sh src/lib/logger.cxx build/obj/lib.logger.o library
+	@bash build/scripts/linux-link.sh build/obj/lib.\*.o build/lib/libdungeonlib.so library -shared
 	@echo "[game] Compiling game..."
-	@echo "[game] Compile : game/game.cxx"
-	@g++ ${LINUX_FLAGS} ${DUNGEON_INCLUDE} \
-	src/game/game.cxx -o build/obj/game.game.o
-	@echo "[game] Linking game..."
-	@g++ -shared build/obj/game.*.o -o build/lib/libdungeongame.so ${GAME_LIBS}
+	@bash build/scripts/linux-compile.sh src/game/game.cxx build/obj/game.game.o game
+	@bash build/scripts/linux-link.sh build/obj/game.\*.o build/lib/libdungeongame.so game "${GAME_LIBS}"
 	@echo "[engine] Compiling engine..."
-	@echo "[engine] Compile : core/main.cxx"
-	@g++ ${LINUX_FLAGS} ${DUNGEON_INCLUDE} \
-	src/core/main.cxx -o build/obj/core.main.o
-	@echo "[engine] Linking engine..."
-	@g++ build/obj/core.*.o -o build/dungeon.out ${CORE_LIBS}
+	@bash build/scripts/linux-compile.sh src/core/main.cxx build/obj/engine.main.o engine
+	@bash build/scripts/linux-link.sh build/obj/engine.\*.o build/dungeon engine "${CORE_LIBS}"
 	@echo "Finishing up..."
 	@bash build/scripts/linux-postcompile.sh
 	@echo "Done!"
@@ -55,3 +40,25 @@ linux-dev:
 linux-release:
 	make linux-dev
 	bash build/scripts/linux-package.sh ${VERSION}
+
+osx-dev:
+	@echo "Setting up..."
+	@bash build/scripts/osx-precompile.sh
+	@echo "[library] Compiling common library..."
+	@bash build/scripts/osx-compile.sh src/lib/window.cxx build/obj/lib.window.o library
+	@bash build/scripts/osx-compile.sh src/lib/config.cxx build/obj/lib.config.o library
+	@bash build/scripts/osx-compile.sh src/lib/logger.cxx build/obj/lib.logger.o library
+	@bash build/scripts/osx-link.sh build/obj/lib.\*.o build/lib/libdungeonlib.so library -shared
+	@echo "[game] Compiling game..."
+	@bash build/scripts/osx-compile.sh src/game/game.cxx build/obj/game.game.o game
+	@bash build/scripts/osx-link.sh build/obj/game.\*.o build/lib/libdungeongame.so game "${GAME_LIBS}"
+	@echo "[engine] Compiling engine..."
+	@bash build/scripts/osx-compile.sh src/core/main.cxx build/obj/engine.main.o engine
+	@bash build/scripts/osx-link.sh build/obj/engine.\*.o build/dungeon engine "${CORE_LIBS}"
+	@echo "Finishing up..."
+	@bash build/scripts/osx-postcompile.sh
+	@echo "Done!"
+
+osx-release:
+	make osx-dev
+	bash build/scripts/osx-package.sh ${VERSION}
