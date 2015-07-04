@@ -32,7 +32,7 @@ linux-dev:
 	@bash build/scripts/linux-link.sh build/obj/game.\*.o build/lib/libdungeongame.so game "${GAME_LIBS}"
 	@echo "[engine] Compiling engine..."
 	@bash build/scripts/linux-compile.sh src/core/main.cxx build/obj/engine.main.o engine
-	@bash build/scripts/linux-link.sh build/obj/engine.\*.o build/dungeon engine "${CORE_LIBS}"
+	@bash build/scripts/linux-link.sh build/obj/engine.\*.o build/dungeon.out engine "${CORE_LIBS}"
 	@echo "Finishing up..."
 	@bash build/scripts/linux-postcompile.sh
 	@echo "Done!"
