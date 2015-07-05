@@ -15,27 +15,32 @@
         
         {
             commit: "7763de1a79b0cbe8f9ca1937deed1c238b5e2d3d",
-            message: "Initial commit"
+            message: "Initial commit",
+            date: "06/27/2015"
         },
         
         {
             commit: "ccd07ac69558cad8c6f64fc4be2904d756846cd2",
-            message: "Delete README.md"
+            message: "Delete README.md",
+            date: "06/27/2015"
         },
         
         {
             commit: "b5120741a49b264d24132f0a6b15961260d9febc",
-            message: "Create README"
+            message: "Create README",
+            date: "06/27/2015"
         },
         
         {
             commit: "a27d51b5c4219d2f52eee8b807c013841efcac39",
-            message: "Update README"
+            message: "Update README",
+            date: "06/27/2015"
         },
 
         {
             commit: "1a4c81fed39b2877601c49cc91912a0c81eace61",
-            message: "Initial Commit. Hello future"
+            message: "Initial Commit. Hello future",
+            date: "06/27/2015"
         },
         
     ];
@@ -57,6 +62,7 @@
             );
             c.innerHTML = list[i]["message"];
             b.appendChild(c);
+            b.innerHTML += "<br /><br />- " + list[i]["date"];
             document.getElementById("maincontent").appendChild(b);
             
         }
