@@ -8,8 +8,45 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    
+    <script>
+    
+    var list = [
+        
+        {
+            commit: "7763de1a79b0cbe8f9ca1937deed1c238b5e2d3d",
+            message: "Initial commit"
+        }
+        
+    ];
+    
+    var dungeon_load = function()
+    {
+        
+        for(var i = 0; i < list.length; i++)
+        {
+            
+            var a = document.createElement("h3");
+            a.innerHTML = list[i]["commit"];
+            document.getElementById("maincontent").appendChild(a);
+            var b = document.createElement("p");
+            var c = document.createElement("a");
+            c.setAttribute(
+                "href", 
+                "https://github.com/Epic-Knife-Studios/dungeoneerz/commit/" + list[i]["commit"]
+            );
+            c.innerHTML = list[i]["message"];
+            b.appendChild(c);
+            document.getElementById("maincontent").appendChild(b);
+            
+        }
+        
+    }
+    
+    </script>
+    
   </head>
-  <body>
+  <body ondomready="dungeon_load()">
     <section class="page-header">
       <h1 class="project-name">Dungeoneerz</h1>
       <h2 class="project-tagline">A 2D top-down game written in C++.</h2>
@@ -18,10 +55,11 @@
       <a href="https://github.com/Epic-Knife-Studios/dungeoneerz/tarball/master" class="btn">Download .tar.gz</a>
     </section>
 
-    <section class="main-content">
-<h3>
-<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>7763de1a79b0cbe8f9ca1937deed1c238b5e2d3d</h3>
+    <section class="main-content" id="maincontent">
 
+<!--
+
+<h3>7763de1a79b0cbe8f9ca1937deed1c238b5e2d3d</h3>
 <p>
 <a href="https://github.com/Epic-Knife-Studios/dungeoneerz/commit/7763de1a79b0cbe8f9ca1937deed1c238b5e2d3d">
 Initial commit
@@ -29,6 +67,8 @@ Initial commit
 <br />
 <br />
 </p>
+
+-->
 
 <footer class="site-footer">
 <span class="site-footer-owner"><a href="https://github.com/Epic-Knife-Studios/dungeoneerz">Dungeoneerz</a> is maintained by <a href="https://github.com/Epic-Knife-Studios">Epic-Knife-Studios</a>.</span>
