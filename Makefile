@@ -7,12 +7,9 @@ GAME_LIBS= -ldungeonlib -ldl -shared
 
 CORE_LIBS= -ldungeonlib -ldl
 
-#LIB_LIBS= -Ldependencies/SFML/lib \
-#-lsfml-system -lsfml-window -lsfml-graphics -lsfml-network -lsfml-audio
-
 DUNGEON_INCLUDE= -Iinclude
 
-LIB_INCLUDE= ${DUNGEON_INCLUDE} -Idependencies/SFML/include
+LIB_INCLUDE= ${DUNGEON_INCLUDE}
 
 default:
 	@echo "Targets :"
