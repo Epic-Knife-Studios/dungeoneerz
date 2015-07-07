@@ -3,9 +3,9 @@
 
 VERSION=0.0.1
 
-GAME_LIBS= -ldungeonlib -shared
+GAME_LIBS= -ldungeonlib -ldl -shared
 
-CORE_LIBS= -ldungeonlib -ldungeongame
+CORE_LIBS= -ldungeonlib -ldl
 
 #LIB_LIBS= -Ldependencies/SFML/lib \
 #-lsfml-system -lsfml-window -lsfml-graphics -lsfml-network -lsfml-audio
@@ -23,15 +23,14 @@ linux-dev:
 	@echo "Setting up..."
 	@bash build/scripts/linux-precompile.sh
 	@echo "[library] Compiling common library..."
-	@bash build/scripts/linux-compile.sh src/lib/window.cxx build/obj/lib.window.o library
 	@bash build/scripts/linux-compile.sh src/lib/config.cxx build/obj/lib.config.o library
 	@bash build/scripts/linux-compile.sh src/lib/logger.cxx build/obj/lib.logger.o library
+	@bash build/scripts/linux-compile.sh src/lib/util.cxx build/obj/lib.util.o library
+	@bash build/scripts/linux-compile.sh src/lib/event.cxx build/obj/lib.event.o library
+	@bash build/scripts/linux-compile.sh src/lib/module.cxx build/obj/lib.module.o library
 	@bash build/scripts/linux-link.sh build/obj/lib.\*.o build/lib/libdungeonlib.so library -shared
-	@echo "[game] Compiling game..."
-	@bash build/scripts/linux-compile.sh src/game/game.cxx build/obj/game.game.o game
-	@bash build/scripts/linux-link.sh build/obj/game.\*.o build/lib/libdungeongame.so game "${GAME_LIBS}"
 	@echo "[engine] Compiling engine..."
-	@bash build/scripts/linux-compile.sh src/core/main.cxx build/obj/engine.main.o engine
+	@bash build/scripts/linux-compile.sh src/engine/main.cxx build/obj/engine.main.o engine
 	@bash build/scripts/linux-link.sh build/obj/engine.\*.o build/dungeon.out engine "${CORE_LIBS}"
 	@echo "Finishing up..."
 	@bash build/scripts/linux-postcompile.sh
@@ -45,15 +44,15 @@ osx-dev:
 	@echo "Setting up..."
 	@bash build/scripts/osx-precompile.sh
 	@echo "[library] Compiling common library..."
-	@bash build/scripts/osx-compile.sh src/lib/window.cxx build/obj/lib.window.o library
 	@bash build/scripts/osx-compile.sh src/lib/config.cxx build/obj/lib.config.o library
 	@bash build/scripts/osx-compile.sh src/lib/logger.cxx build/obj/lib.logger.o library
+	@bash build/scripts/osx-compile.sh src/lib/util.cxx build/obj/lib.util.o library
+	@bash build/scripts/osx-compile.sh src/lib/module.cxx build/obj/lib.module.o library
+	@bash build/scripts/osx-compile.sh src/lib/event.cxx build/obj/lib.event.o library
 	@bash build/scripts/osx-link.sh build/obj/lib.\*.o build/lib/libdungeonlib.so library -shared
-	@echo "[game] Compiling game..."
-	@bash build/scripts/osx-compile.sh src/game/game.cxx build/obj/game.game.o game
 	@bash build/scripts/osx-link.sh build/obj/game.\*.o build/lib/libdungeongame.so game "${GAME_LIBS}"
 	@echo "[engine] Compiling engine..."
-	@bash build/scripts/osx-compile.sh src/core/main.cxx build/obj/engine.main.o engine
+	@bash build/scripts/osx-compile.sh src/engine/main.cxx build/obj/engine.main.o engine
 	@bash build/scripts/osx-link.sh build/obj/engine.\*.o build/dungeon engine "${CORE_LIBS}"
 	@echo "Finishing up..."
 	@bash build/scripts/osx-postcompile.sh

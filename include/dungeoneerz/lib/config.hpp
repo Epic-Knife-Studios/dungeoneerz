@@ -14,7 +14,40 @@ namespace Dungeoneerz
     
     namespace Library
     {
-    
+
+        class IConfigNode
+        {
+
+        protected:
+
+            string name;
+            string value;
+
+        public:
+
+            IConfigNode();
+            IConfigNode(string name);
+            IConfigNode(string name, string value);
+
+            string GetName();
+            string GetValue();
+
+        };
+
+        class IConfigParser
+        {
+
+        protected:
+
+
+
+        public:
+            IConfigParser();
+
+            bool Parse(string text);
+
+        };
+
         class CfgNode
         {
             
