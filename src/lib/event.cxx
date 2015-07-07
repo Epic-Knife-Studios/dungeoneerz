@@ -21,14 +21,14 @@ namespace Dungeoneerz
             return this->name;
         }
 
-        int IEventHandler::Handle(IEvent evt)
+        void IEventHandler::Handle(IEvent evt)
         {
 
         }
 
         bool IEventHandler::Responds(string name)
         {
-            return true;
+            return false;
         }
 
         EventManager::EventManager()
@@ -36,7 +36,7 @@ namespace Dungeoneerz
             this->handlers = vector<IEventHandler>();
         }
 
-        bool EventManager::AddHandler(IEventHandler handler)
+        void EventManager::AddHandler(IEventHandler handler)
         {
             this->handlers[this->handlers.size()] = handler;
         }
