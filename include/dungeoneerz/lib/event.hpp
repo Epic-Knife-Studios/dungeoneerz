@@ -34,9 +34,9 @@ namespace Dungeoneerz
 
             public:
 
-                int Handle(IEvent evt);
+                virtual void Handle(IEvent* evt);
 
-                bool Responds(string name);
+                virtual bool Responds(string name);
 
         };
 
@@ -45,15 +45,15 @@ namespace Dungeoneerz
 
             private:
 
-                vector<IEventHandler> handlers;
+                vector<IEventHandler*> handlers;
 
             public:
 
                 EventManager();
 
-                bool AddHandler(IEventHandler handler);
+                void AddHandler(IEventHandler* handler);
 
-                void Raise(IEvent evt);
+                void Raise(IEvent* evt);
 
         };
 
