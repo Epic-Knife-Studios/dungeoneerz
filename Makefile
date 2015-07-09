@@ -48,6 +48,7 @@ osx-dev:
 	@bash build/scripts/osx-compile.sh src/lib/event.cxx build/obj/lib.event.o library
 	@bash build/scripts/osx-link.sh build/obj/lib.\*.o build/lib/libdungeonlib.so library -shared
 	@echo "[engine] Compiling engine..."
+	@bash build/scripts/osx-compile.sh src/engine/events.cxx build/obj/engine.events.o engine
 	@bash build/scripts/osx-compile.sh src/engine/main.cxx build/obj/engine.main.o engine
 	@bash build/scripts/osx-link.sh build/obj/engine.\*.o build/dungeon engine "${CORE_LIBS}"
 	@echo "Finishing up..."

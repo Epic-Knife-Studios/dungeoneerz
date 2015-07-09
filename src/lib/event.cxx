@@ -1,5 +1,8 @@
 #include "dungeoneerz/lib/event.hpp"
 
+#include <cstdio>
+#include <string.h>
+
 namespace Dungeoneerz
 {
 
@@ -21,7 +24,7 @@ namespace Dungeoneerz
             return this->name;
         }
 
-        void IEventHandler::Handle(IEvent evt)
+        void IEventHandler::Handle(IEvent* evt)
         {
 
         }
@@ -33,22 +36,19 @@ namespace Dungeoneerz
 
         EventManager::EventManager()
         {
-            this->handlers = vector<IEventHandler>();
+            this->handlers = vector<IEventHandler*>();
         }
 
-        void EventManager::AddHandler(IEventHandler handler)
+        void EventManager::AddHandler(IEventHandler* handler)
         {
-            this->handlers[this->handlers.size()] = handler;
+            this->handlers.push_back(handler);
         }
 
-        void EventManager::Raise(IEvent evt)
+        void EventManager::Raise(IEvent* evt)
         {
             for(int i = 0; i < this->handlers.size(); i++)
             {
-                if(this->handlers[i].Responds(evt.GetName()))
-                {
-                    this->handlers[i].Handle(evt);
-                }
+                this->handlers[i]->Handle(evt);
             }
         }
 
