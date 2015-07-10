@@ -12,12 +12,14 @@ namespace Dungeoneerz
     namespace Library
     {
 
-        class IModule
+        class Library
         {
 
             public:
 
-                IModule();
+                Library();
+
+                bool Load(string path);
 
         };
 

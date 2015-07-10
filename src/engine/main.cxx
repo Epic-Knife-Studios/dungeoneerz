@@ -24,15 +24,11 @@ int main(int argc, char* argv[])
     // Initialize Event Manager.
     emgr = new EventManager();
 
-    BaseHandler* bh = new BaseHandler(logger);
-
     // Setup base event handler.
-    emgr->AddHandler(bh);
-
-    StartEvent* evt = new StartEvent();
+    emgr->AddHandler(new BaseHandler(logger));
 
     // Start.
-    emgr->Raise(evt);
+    emgr->Raise(new StartEvent());
 
     return 0;
 }
