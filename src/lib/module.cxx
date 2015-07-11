@@ -11,16 +11,6 @@ namespace Dungeoneerz
 
         }
 
-        int IModule::Version()
-        {
-            return 1;
-        }
-
-        string IModule::Name()
-        {
-            return "null";
-        }
-
     }
 
 }

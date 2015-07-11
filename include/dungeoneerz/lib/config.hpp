@@ -37,6 +37,8 @@ namespace Dungeoneerz
 
             public:
 
+                vector<IElement*> Children;
+
                 IElement(string name);
 
                 int GetType();
@@ -65,23 +67,12 @@ namespace Dungeoneerz
 
         };
 
-        class ElementList : public IElement
+        class CfgParser
         {
 
             public:
 
-                vector<IElement*> Elements;
-
-                ElementList(string name);
-
-        };
-
-        class ConfigParser
-        {
-
-            public:
-
-                ConfigParser();
+                CfgParser();
 
         };
 
@@ -90,11 +81,9 @@ namespace Dungeoneerz
 
             public:
 
-                ElementMap* root;
+                IElement* root;
 
                 Configuration();
-
-                bool Parse(string str);
 
         };
         
