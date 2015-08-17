@@ -1,15 +1,17 @@
+// Dungeoneerz
+// Copyright(c) 2015 Samuel "MrOverkill" Meyers
+
 #pragma once
 
-#include <string>
-
 #include "dungeoneerz/lib/event.hpp"
-#include "dungeoneerz/lib/logger.hpp"
-
-using std::string;
 
 using Dungeoneerz::Library::IEvent;
 using Dungeoneerz::Library::IEventHandler;
 using Dungeoneerz::Library::Logger;
+
+#include <string>
+
+using std::string;
 
 namespace Dungeoneerz
 {
@@ -20,17 +22,36 @@ namespace Dungeoneerz
         class StartEvent : public IEvent
         {
 
-        public:
+            public:
 
-            StartEvent();
+                StartEvent();
 
         };
 
         class StopEvent : public IEvent
         {
 
-        public:
-            StopEvent();
+            public:
+
+                StopEvent();
+
+        };
+
+        class PreStartEvent : public IEvent
+        {
+
+            public:
+
+                PreStartEvent();
+
+        };
+
+        class PreStopEvent : public IEvent
+        {
+
+            public:
+
+                PreStopEvent();
 
         };
 

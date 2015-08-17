@@ -1,0 +1,16 @@
+#pragma once
+
+#include "dungeoneerz/engine/core.hpp"
+
+using Dungeoneerz::Engine::EngineCore;
+
+namespace Dungeoneerz
+{
+
+    void SetEngine(EngineCore* core);
+
+    EngineCore* GetEngine();
+
+    template<typename T> T CastEngine();
+
+}

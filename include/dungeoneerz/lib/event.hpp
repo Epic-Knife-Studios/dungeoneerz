@@ -1,3 +1,6 @@
+// Dungeoneerz
+// Copyright(c) 2015 Samuel "MrOverkill" Meyers
+
 #pragma once
 
 #include <vector>
@@ -19,11 +22,11 @@ namespace Dungeoneerz
 
                 string name;
 
-                IEvent(string name);
-
             public:
 
                 IEvent();
+
+                IEvent(string name);
 
                 string GetName();
 

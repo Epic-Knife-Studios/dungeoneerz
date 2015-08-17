@@ -2,7 +2,7 @@ Dungeoneerz
 
 Copyright(c) 2015 Samuel "MrOverkill" Meyers
 
-Dungeoneerz is a top-down, 2D game written in C++.
+Dungeoneerz is a game and engine written in C++.
 
 Supported systems:
 * Ubuntu Linux
@@ -11,3 +11,14 @@ Supported systems:
 Tested systems:
 - Ubuntu 15.04
 - OSX Mavericks
+
+To get, compile, and run on Linux or OSX:
+    "git clone https://github.com/TheOfficialStinger/Dungeoneerz.git dungeoneerz"
+    "cd dungeoneerz"
+    "mkdir -p build/cmake && cd build/cmake"
+    "cmake ../../"
+    "make"
+    "./dungeon"
+
+Modify the contents of src/game and include/dungeoneerz/game to make your
+own games with the Dungeoneerz engine!

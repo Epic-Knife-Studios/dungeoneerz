@@ -3,20 +3,11 @@
 
 #pragma once
 
-#define ETYPE_NONE 0
-#define ETYPE_INT 1
-#define ETYPE_STRING 2
-#define ETYPE_LIST 3
-#define ETYPE_MAP 4
-
 #include <string>
-#include <vector>
-#include <map>
 
 #include <cstdio>
 
 using std::string;
-using std::vector;
 
 namespace Dungeoneerz
 {
@@ -24,67 +15,63 @@ namespace Dungeoneerz
     namespace Library
     {
 
-        class IElement
+        class IConfigNode
         {
 
-            protected:
+        protected:
 
-                int type;
+            string name;
+            string value;
 
+        public:
+
+            IConfigNode();
+            IConfigNode(string name);
+            IConfigNode(string name, string value);
+
+            string GetName();
+            string GetValue();
+
+        };
+
+        class IConfigParser
+        {
+
+        protected:
+
+
+
+        public:
+            IConfigParser();
+
+            bool Parse(string text);
+
+        };
+
+        class CfgNode
+        {
+            
+            public:
                 string name;
-
-                IElement(int type);
-
-            public:
-
-                vector<IElement*> Children;
-
-                IElement(string name);
-
-                int GetType();
-
+                string value;
+                
+                CfgNode(string name, string value);
+                
+                
+            
         };
-
-        class ElementInt : public IElement
+    
+        class Config
         {
-
+            
+            private:
+                string text;
+            
             public:
-
-                int Value;
-
-                ElementInt(string name, int i);
-
-        };
-
-        class ElementString : public IElement
-        {
-
-            public:
-
-                string Value;
-
-                ElementString(string name, string str);
-
-        };
-
-        class CfgParser
-        {
-
-            public:
-
-                CfgParser();
-
-        };
-
-        class Configuration
-        {
-
-            public:
-
-                IElement* root;
-
-                Configuration();
-
+                Config(string text);
+                
+                
+            
         };
         
     }

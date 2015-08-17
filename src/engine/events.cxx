@@ -1,17 +1,19 @@
-#include "dungeoneerz/engine/events.hpp"
+// Dungeoneerz
+// Copyright(c) 2015 Samuel "MrOverkill" Meyers
 
-#include <string>
-
-#include <cstdio>
-
-#include "dungeoneerz/lib/event.hpp"
-#include "dungeoneerz/lib/logger.hpp"
-
-using std::string;
+#ifndef DUNGEON_HEADER_INCLUDED
+#include "dungeoneerz/engine/dungeon.hpp"
+#endif
 
 using Dungeoneerz::Library::IEvent;
 using Dungeoneerz::Library::IEventHandler;
 using Dungeoneerz::Library::Logger;
+
+#include <cstdio>
+
+#include <string>
+
+using std::string;
 
 namespace Dungeoneerz
 {
@@ -30,6 +32,20 @@ namespace Dungeoneerz
         {
 
             this->name = string("core/stop");
+
+        }
+
+        PreStartEvent::PreStartEvent() : IEvent()
+        {
+
+            this->name = string("core/prestart");
+
+        }
+
+        PreStopEvent::PreStopEvent() : IEvent()
+        {
+
+            this->name = string("core/prestop");
 
         }
 
@@ -63,18 +79,15 @@ namespace Dungeoneerz
         bool BaseHandler::Responds(string name)
         {
 
-            if(name == string("core/start"))
+            if(
+                name == string("core/start") ||
+                name == string("core/stop")
+            )
             {
                 return true;
             }
-            else if (name.compare("core/stop"))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+
+            return false;
 
         }
 
