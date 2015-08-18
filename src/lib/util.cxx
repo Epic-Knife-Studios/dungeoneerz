@@ -1,3 +1,6 @@
+// Dungeoneerz
+// Copyright(c) 2015 Samuel "MrOverkill" Meyers
+
 #include "dungeoneerz/lib/util.hpp"
 
 namespace Dungeoneerz
@@ -61,6 +64,21 @@ namespace Dungeoneerz
                     c == '.' ||
                     c == '-'
                 );
+            }
+
+            bool StrIsNumeric(string str)
+            {
+
+                for(int i = 0; i < str.length(); i++)
+                {
+                    if(CharIsNumeric(str.c_str()[i]))
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+
             }
 
             string StrAsNumber(string str)
@@ -133,6 +151,20 @@ namespace Dungeoneerz
                 }
 
                 return str;
+
+            }
+
+            void MilliSleep(int s)
+            {
+
+                usleep(s*1000);
+
+            }
+
+            void Sleep(int s)
+            {
+
+                MilliSleep(s*1000);
 
             }
 

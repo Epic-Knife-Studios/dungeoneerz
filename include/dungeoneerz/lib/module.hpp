@@ -1,3 +1,6 @@
+// Dungeoneerz
+// Copyright(c) 2015 Samuel "MrOverkill" Meyers
+
 #pragma once
 
 #include <string>
@@ -17,11 +20,32 @@ namespace Dungeoneerz
 
             public:
 
-                IModule();
+                string name;
 
-                int Version();
+                IModule(string name);
 
-                string Name();
+                virtual void OnLoad();
+
+                virtual void OnStop();
+
+        };
+
+        typedef IModule* (*ModuleEntryType)();
+
+        class ModLoader
+        {
+
+            private:
+
+                string basepath;
+
+            public:
+
+                ModLoader(string path);
+
+                template<typename T, typename F> T LoadAs(string name, string entry);
+
+                IModule* LoadMod(string name, string entry);
 
         };
 

@@ -1,3 +1,6 @@
+// Dungeoneerz
+// Copyright(c) 2015 Samuel "MrOverkill" Meyers
+
 #include "dungeoneerz/lib/event.hpp"
 
 #include <cstdio>
@@ -16,7 +19,7 @@ namespace Dungeoneerz
 
         IEvent::IEvent()
         {
-            this->name = "default";
+            this->name = string("default");
         }
 
         string IEvent::GetName()

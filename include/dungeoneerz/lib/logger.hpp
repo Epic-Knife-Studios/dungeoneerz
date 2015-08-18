@@ -13,24 +13,24 @@ using std::string;
 
 namespace Dungeoneerz
 {
-    
+
     namespace Library
     {
-    
+
         class Logger
         {
-            
+
             private:
                 long int ltime;
                 FILE* out;
-            
+
             public:
                 Logger(string location);
-                
+
                 void Log(string sender, string message);
-        
+
         };
-    
+
     }
-    
+
 }
