@@ -61,7 +61,14 @@ namespace Dungeoneerz
         void DungeonGame::Start()
         {
 
-            this->logger->Log(string("Game"), string("Starting..."));
+            this->logger->Log(
+                string("Game"),
+                string("Starting Dungeoneerz ") +
+                to_string(DUNGEON_VERSION) +
+                string(".") +
+                to_string(DUNGEON_REVISION) +
+                string("...")
+            );
 
             this->emgr->AddHandler(new GameHandler(this->logger));
 

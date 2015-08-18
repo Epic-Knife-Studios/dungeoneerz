@@ -2,7 +2,16 @@ cmake_minimum_required(VERSION 3.1)
 
 project(Dungeoneerz)
 
+set(DUNGEON_VERSION 1)
+set(DUNGEON_REVISION 0)
+
+configure_file (
+  "include/dungeoneerz/config.h.in"
+  "${PROJECT_BINARY_DIR}/include/dungeoneerz/config.h"
+  )
+
 include_directories(include)
+include_directories("${PROJECT_BINARY_DIR}/include")
 
 file(GLOB EngineSrc
     "src/lib/*.cxx"
