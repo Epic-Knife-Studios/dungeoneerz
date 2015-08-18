@@ -1,5 +1,9 @@
 #pragma once
 
+// + Configuration
+
+#include "dungeoneerz/config.h"
+
 // + Dungeoneerz engine & library.
 
 #include "dungeoneerz/lib/logger.hpp"
@@ -25,6 +29,8 @@ typedef int StopCode;
 #define GAME_STOP_EVENTUALLY 1
 #define GAME_STOP_SOON 2
 #define GAME_STOP_NOW 3
+
+using std::to_string;
 
 namespace Dungeoneerz
 {
