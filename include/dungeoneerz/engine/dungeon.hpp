@@ -11,6 +11,11 @@ namespace Dungeoneerz
 
     EngineCore* GetEngine();
 
-    template<typename T> T CastEngine();
+    template<typename T> T* CastEngine()
+    {
+
+        return (T*)GetEngine();
+
+    }
 
 }
