@@ -14,11 +14,15 @@ using std::string;
 #include "dungeoneerz/lib/event.hpp"
 #include "dungeoneerz/engine/dungeon.hpp"
 #include "dungeoneerz/engine/game.hpp"
+#include "dungeoneerz/lib/module.hpp"
 
 using Dungeoneerz::Library::IEvent;
 using Dungeoneerz::Library::IEventHandler;
 using Dungeoneerz::Library::EventManager;
 using Dungeoneerz::Library::Logger;
+using Dungeoneerz::Library::IModule;
+using Dungeoneerz::Library::ModLoader;
+using Dungeoneerz::Library::ModuleEntryType;
 using Dungeoneerz::Engine::GameEngine;
 
 typedef int ReadCode;
@@ -71,6 +75,8 @@ namespace Dungeoneerz
             private:
 
                 Logger* logger;
+
+                ModLoader* loader;
 
             public:
 

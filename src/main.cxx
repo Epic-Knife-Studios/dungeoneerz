@@ -28,16 +28,16 @@ int main(int argc, char* argv[])
         new GameEngine()
     );
 
-    ((GameEngine*)Dungeoneerz::GetEngine())->game = new DungeonGame(
-        ((GameEngine*)Dungeoneerz::GetEngine())->logger,
-        ((GameEngine*)Dungeoneerz::GetEngine())->emgr
+    Dungeoneerz::CastEngine<GameEngine>()->game = new DungeonGame(
+        Dungeoneerz::CastEngine<GameEngine>()->logger,
+        Dungeoneerz::CastEngine<GameEngine>()->emgr
     );
 
-    ((GameEngine*)Dungeoneerz::GetEngine())->Start();
+    Dungeoneerz::CastEngine<GameEngine>()->Start();
 
-    ((GameEngine*)Dungeoneerz::GetEngine())->game->Run();
+    Dungeoneerz::CastEngine<GameEngine>()->game->Run();
 
-    ((GameEngine*)Dungeoneerz::GetEngine())->Stop();
+    Dungeoneerz::CastEngine<GameEngine>()->Stop();
 
     return 0;
 }

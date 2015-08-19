@@ -81,6 +81,8 @@ namespace Dungeoneerz
 
             this->logger = logger;
 
+            this->loader = new ModLoader(string("./"));
+
         }
 
         void ConsoleCommandPrinter::Handle(IEvent* evt)
@@ -99,9 +101,38 @@ namespace Dungeoneerz
                         string("Quitting...")
                     );
 
-                    ((GameEngine*)Dungeoneerz::GetEngine())->Stop();
+                    Dungeoneerz::CastEngine<GameEngine>()->Stop();
 
                     return;
+                }
+
+                if(event->GetCommand() == string("lmod"))
+                {
+
+                    IModule* mod = this->loader->LoadAs<IModule, ModuleEntryType>(
+                        string("graphicsmod"),
+                        string("dungeon_graphics_entry")
+                    );
+
+                    if(mod == (IModule*)NULL)
+                    {
+
+                        this->logger->Log(
+                            string("Console"),
+                            string("Module load error!")
+                        );
+
+                        return;
+
+                    }
+
+                    this->logger->Log(
+                        string("Console"),
+                        string("Mod name : ") + mod->name
+                    );
+
+                    return;
+
                 }
 
                 this->logger->Log(
