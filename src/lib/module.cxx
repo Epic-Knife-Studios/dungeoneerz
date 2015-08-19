@@ -12,8 +12,6 @@ namespace Dungeoneerz
         IModule::IModule()
         {
 
-            http://www.boost.org/
-
             this->name = string("null");
 
         }

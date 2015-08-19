@@ -110,8 +110,8 @@ namespace Dungeoneerz
                 {
 
                     IModule* mod = this->loader->LoadAs<IModule, ModuleEntryType>(
-                        string("graphicsmod"),
-                        string("dungeon_graphics_entry")
+                        string("consolemod"),
+                        string("dungeon_console_entry")
                     );
 
                     if(mod == (IModule*)NULL)
@@ -119,12 +119,14 @@ namespace Dungeoneerz
 
                         this->logger->Log(
                             string("Console"),
-                            string("Module load error!")
+                            string("Mod load error!")
                         );
 
                         return;
 
                     }
+
+                    mod->OnLoad();
 
                     this->logger->Log(
                         string("Console"),

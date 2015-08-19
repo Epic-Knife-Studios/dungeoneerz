@@ -94,7 +94,16 @@ namespace Dungeoneerz
 
             }
 
-            F runme = (F)dlsym(handle, entry.c_str());
+            F runme = (F)NULL;
+
+            runme = (F)dlsym(handle, entry.c_str());
+
+            if(runme == (F)NULL)
+            {
+
+                return mod;
+
+            }
 
             mod = runme();
 

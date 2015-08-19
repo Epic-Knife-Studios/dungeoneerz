@@ -19,10 +19,17 @@ namespace Dungeoneerz
 
     }
 
-    template<typename T> T CastEngine()
+    Logger* GetLogger()
     {
 
-        return (T)GetEngine();
+        return GetEngine()->logger;
+
+    }
+
+    EventManager* GetEventManager()
+    {
+
+        return GetEngine()->emgr;
 
     }
 
