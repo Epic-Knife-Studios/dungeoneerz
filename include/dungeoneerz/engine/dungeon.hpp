@@ -18,4 +18,8 @@ namespace Dungeoneerz
 
     }
 
+    Logger* GetLogger();
+
+    EventManager* GetEventManager();
+
 }
