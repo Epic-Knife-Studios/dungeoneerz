@@ -67,19 +67,6 @@ namespace Dungeoneerz
 
         };
 
-        class DTree
-        {
-
-            public:
-
-                DTree();
-
-                void Add(DChunk* chk);
-
-
-
-        };
-
     }
 
 }

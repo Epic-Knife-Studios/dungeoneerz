@@ -1,3 +1,6 @@
+// Dungeoneerz
+// Copyright(c) 2015 Samuel "MrOverkill" Meyers
+
 #pragma once
 
 #include "dungeoneerz/lib/event.hpp"

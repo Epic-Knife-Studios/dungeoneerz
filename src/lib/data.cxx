@@ -89,18 +89,6 @@ namespace Dungeoneerz
 
         }
 
-
-
-        DTree::DTree()
-        {
-
-        }
-
-        void DTree::Add(DChunk* chk)
-        {
-            return;
-        }
-
     }
 
 }

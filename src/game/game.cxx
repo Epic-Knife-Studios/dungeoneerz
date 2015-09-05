@@ -83,6 +83,66 @@ namespace Dungeoneerz
 
             this->logger->Log(string("Game"), string("Loading Console..."));
 
+            string current = string("");
+
+            vector<string> lines = vector<string>();
+
+            FILE* f = fopen("autorun.dc", "r");
+
+            if(!f)
+            {
+
+                f = fopen("autorun.dc", "w");
+
+                fprintf(f, "lmod: consolemod\n");
+
+                fclose(f);
+
+                f = fopen("autorun.dc", "r");
+
+            }
+
+            char c = fgetc(f);
+
+            while ( c != EOF )
+            {
+
+                if(c != '\n')
+                {
+
+                    current = current + c;
+
+                }
+
+                if(c == '\n' && current != string(""))
+                {
+
+                    lines.push_back(current);
+
+                    current = string("");
+
+                }
+
+                c = fgetc(f);
+
+            }
+
+            if(current != string(""))
+            {
+
+                lines.push_back(current);
+
+            }
+
+            for(int i = 0; i < lines.size(); i++)
+            {
+
+                this->emgr->Raise(
+                    new ConsoleCommandEvent(lines[i])
+                );
+
+            }
+
             do {
                 rc = this->console->Read();
             } while(rc != CONSOLE_CODE_DIE);

@@ -1,3 +1,6 @@
+// Dungeoneerz
+// Copyright(c) 2015 Samuel "MrOverkill" Meyers
+
 #include "dungeoneerz/game/console.hpp"
 
 namespace Dungeoneerz
@@ -39,6 +42,13 @@ namespace Dungeoneerz
                 if(c == EOF)
                 {
 
+                    this->logger->Log(
+                        string("Console"),
+                        string("Quitting...")
+                    );
+
+                    Dungeoneerz::CastEngine<GameEngine>()->Stop();
+
                     return CONSOLE_CODE_DIE;
 
                 }
@@ -65,7 +75,93 @@ namespace Dungeoneerz
         {
 
             this->name = string("console/command");
-            this->cmd = cmd;
+
+            this->rawcmd = cmd + (char)EOF;
+
+            this->cmd = string("");
+
+            this->arguments = vector<string>();
+
+            char c;
+
+            string argument = string("");
+
+            bool cmdset = false;
+
+            for(int i = 0; i < this->rawcmd.length(); i++)
+            {
+
+                c = this->rawcmd.c_str()[i];
+
+                if(c == ':' && !cmdset)
+                {
+
+                    cmdset = true;
+
+                    continue;
+
+                }
+
+                if(c != (char)EOF && !cmdset)
+                {
+
+                    this->cmd = this->cmd + c;
+
+                }
+
+                if(c != (char)EOF && cmdset)
+                {
+
+                    if(c == '\\')
+                    {
+
+                        argument = argument + ' ';
+
+                        i++;
+
+                        continue;
+
+                    }
+
+                    if(CharIsWhitespace(c) && argument != string(""))
+                    {
+
+                        this->arguments.push_back(argument);
+
+                        argument = string("");
+
+                    }
+                    else if(CharIsWhitespace(c) && argument == string(""))
+                    {
+
+                        continue;
+
+                    }
+                    else
+                    {
+
+                        argument = argument + c;
+
+                    }
+
+
+                }
+
+            }
+
+            if(argument != string(""))
+            {
+
+                this->arguments.push_back(argument);
+
+            }
+
+        }
+
+        string ConsoleCommandEvent::GetRawCommand()
+        {
+
+            return this->rawcmd;
 
         }
 
@@ -76,12 +172,21 @@ namespace Dungeoneerz
 
         }
 
+        vector<string> ConsoleCommandEvent::GetArguments()
+        {
+
+            return this->arguments;
+
+        }
+
         ConsoleCommandPrinter::ConsoleCommandPrinter(Logger* logger)
         {
 
             this->logger = logger;
 
             this->loader = new ModLoader(string("./"));
+
+            this->mods = new ModList();
 
         }
 
@@ -109,9 +214,32 @@ namespace Dungeoneerz
                 if(event->GetCommand() == string("lmod"))
                 {
 
+                    vector<string> args = event->GetArguments();
+
+                    if(args.size() < 1)
+                    {
+
+                        this->logger->Log(
+                            string("Console"),
+                            string("Usage: lmod: <library_name> [entry_point]")
+                        );
+
+                        return;
+
+                    }
+
+                    string lname = args[0];
+                    string lfunc = string("dungeon_module_entry");
+
+                    if(args.size() > 1)
+                    {
+                        lfunc = args[1];
+
+                    }
+
                     IModule* mod = this->loader->LoadAs<IModule, ModuleEntryType>(
-                        string("consolemod"),
-                        string("dungeon_console_entry")
+                        lname,
+                        lfunc
                     );
 
                     if(mod == (IModule*)NULL)
@@ -128,21 +256,11 @@ namespace Dungeoneerz
 
                     mod->OnLoad();
 
-                    this->logger->Log(
-                        string("Console"),
-                        string("Mod name : ") + mod->name
-                    );
+                    this->mods->Add(mod);
 
                     return;
 
                 }
-
-                this->logger->Log(
-                    string("Console"),
-                        string("Command '") +
-                        event->GetCommand() +
-                        string("' is undefined!")
-                );
 
             }
 

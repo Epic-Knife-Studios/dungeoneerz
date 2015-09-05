@@ -1,3 +1,6 @@
+// Dungeoneerz
+// Copyright(c) 2015 Samuel "MrOverkill" Meyers
+
 #include "dungeoneerz/engine/core.hpp"
 
 #include <cstdlib>

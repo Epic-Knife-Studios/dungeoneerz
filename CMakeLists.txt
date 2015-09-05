@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.1)
 project(Dungeoneerz)
 
 set(DUNGEON_VERSION 1)
-set(DUNGEON_REVISION 2)
+set(DUNGEON_REVISION 3)
 
 configure_file (
   "include/dungeoneerz/config.h.in"
@@ -26,8 +26,8 @@ file(GLOB BinSrc
     "src/main.cxx"
 )
 
-file(GLOB ModSrc
-    "src/mods/graphics/*.cxx"
+file(GLOB ModSrc_Console
+    "src/mods/console/*.cxx"
 )
 
 add_library(dungeonlib SHARED ${EngineSrc})
@@ -41,3 +41,7 @@ target_link_libraries(dungeongame dungeonlib)
 add_executable(dungeon ${BinSrc})
 
 target_link_libraries(dungeon dungeonlib dungeongame)
+
+add_library(consolemod SHARED ${ModSrc_Console})
+
+target_link_libraries(consolemod dungeonlib dungeongame)

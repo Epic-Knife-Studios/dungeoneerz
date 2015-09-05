@@ -66,6 +66,18 @@ namespace Dungeoneerz
                 );
             }
 
+            bool CharIsWhitespace(char c)
+            {
+
+                return (
+                    c == ' ' ||
+                    c == '\t' ||
+                    c == '\n' ||
+                    c == '\r'
+                );
+
+            }
+
             bool StrIsNumeric(string str)
             {
 

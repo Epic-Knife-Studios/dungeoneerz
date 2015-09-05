@@ -4,6 +4,7 @@
 #pragma once
 
 #include "dungeoneerz/lib/event.hpp"
+#include "dungeoneerz/lib/module.hpp"
 
 using Dungeoneerz::Library::IEvent;
 using Dungeoneerz::Library::IEventHandler;
@@ -52,6 +53,28 @@ namespace Dungeoneerz
             public:
 
                 PreStopEvent();
+
+        };
+
+        class ModuleSignalEvent : public IEvent
+        {
+
+            private:
+
+                string function;
+
+                void* arguments;
+
+            public:
+
+                ModuleSignalEvent(string function, void* arguments);
+
+                string GetFunction();
+
+                template<typename T> T GetArguments()
+                {
+                    return (T)this->arguments;
+                };
 
         };
 

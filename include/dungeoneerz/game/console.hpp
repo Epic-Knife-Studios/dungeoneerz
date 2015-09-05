@@ -10,11 +10,15 @@
 
 using std::vector;
 using std::string;
+using std::to_string;
 
 #include "dungeoneerz/lib/event.hpp"
+#include "dungeoneerz/lib/logger.hpp"
+#include "dungeoneerz/lib/module.hpp"
+#include "dungeoneerz/lib/util.hpp"
 #include "dungeoneerz/engine/dungeon.hpp"
 #include "dungeoneerz/engine/game.hpp"
-#include "dungeoneerz/lib/module.hpp"
+#include "dungeoneerz/game/modlist.hpp"
 
 using Dungeoneerz::Library::IEvent;
 using Dungeoneerz::Library::IEventHandler;
@@ -23,7 +27,11 @@ using Dungeoneerz::Library::Logger;
 using Dungeoneerz::Library::IModule;
 using Dungeoneerz::Library::ModLoader;
 using Dungeoneerz::Library::ModuleEntryType;
+using Dungeoneerz::Library::Util::CharIsWhitespace;
+
 using Dungeoneerz::Engine::GameEngine;
+
+using Dungeoneerz::Game::ModList;
 
 typedef int ReadCode;
 
@@ -59,13 +67,21 @@ namespace Dungeoneerz
 
             private:
 
+                string rawcmd;
+
                 string cmd;
+
+                vector<string> arguments;
 
             public:
 
                 ConsoleCommandEvent(string cmd);
 
+                string GetRawCommand();
+
                 string GetCommand();
+
+                vector<string> GetArguments();
 
         };
 
@@ -77,6 +93,8 @@ namespace Dungeoneerz
                 Logger* logger;
 
                 ModLoader* loader;
+
+                ModList* mods;
 
             public:
 

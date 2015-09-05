@@ -49,6 +49,24 @@ namespace Dungeoneerz
 
         }
 
+        ModuleSignalEvent::ModuleSignalEvent(string function, void* arguments) : IEvent()
+        {
+
+            this->name = string("core/modsignal");
+
+            this->function = function;
+
+            this->arguments = arguments;
+
+        }
+
+        string ModuleSignalEvent::GetFunction()
+        {
+
+            return this->function;
+
+        }
+
         BaseHandler::BaseHandler(Logger* logger) : IEventHandler()
         {
 

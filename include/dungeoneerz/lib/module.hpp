@@ -3,11 +3,15 @@
 
 #pragma once
 
-#include <string>
-
 #include <dlfcn.h>
 
+#include <string>
+
 using std::string;
+
+#include "dungeoneerz/lib/fs.hpp"
+
+using Dungeoneerz::Library::FileSystem::ExistsFile;
 
 namespace Dungeoneerz
 {
@@ -27,6 +31,8 @@ namespace Dungeoneerz
                 IModule(string name);
 
                 virtual void OnLoad();
+
+                virtual void OnStart();
 
                 virtual void OnStop();
 
@@ -58,6 +64,10 @@ namespace Dungeoneerz
 
             T* mod = (T*)NULL;
 
+            // Mac OS X library naming convention.
+
+
+
             void* handle = dlopen(
                 (this->basepath + string("/lib") + name + string(".dylib")).c_str(),
                 RTLD_LAZY | RTLD_GLOBAL
@@ -67,6 +77,8 @@ namespace Dungeoneerz
             {
 
                 dlerror();
+
+                // Linux library naming convention.
 
                 handle = dlopen(
                     (this->basepath + string("/lib") + name + string(".so")).c_str(),
@@ -78,6 +90,8 @@ namespace Dungeoneerz
 
                     dlerror();
 
+                    // Windows library naming convention.
+
                     handle = dlopen(
                         (this->basepath + string("/") + name + string(".dll")).c_str(),
                         RTLD_LAZY | RTLD_GLOBAL
@@ -86,7 +100,35 @@ namespace Dungeoneerz
                     if((error = dlerror()) != NULL)
                     {
 
-                        return (T*)mod;
+                        dlerror();
+
+                        // Cygwin library naming convention.
+
+                        handle = dlopen(
+                            (this->basepath + string("/cy") + name + string(".dll")).c_str(),
+                            RTLD_LAZY | RTLD_GLOBAL
+                        );
+
+                        if((error = dlerror()) != NULL)
+                        {
+
+                            dlerror();
+
+                            // Dungeoneerz library naming convention.
+
+                            handle = dlopen(
+                                (this->basepath + string("/") + name + string(".dmod")).c_str(),
+                                RTLD_LAZY | RTLD_GLOBAL
+                            );
+
+                            if((error = dlerror()) != NULL)
+                            {
+
+                                return (T*)mod;
+
+                            }
+
+                        }
 
                     }
 
@@ -101,7 +143,7 @@ namespace Dungeoneerz
             if(runme == (F)NULL)
             {
 
-                return mod;
+                return (T*)NULL;
 
             }
 
@@ -110,6 +152,7 @@ namespace Dungeoneerz
             return mod;
 
         }
+
 
     }
 

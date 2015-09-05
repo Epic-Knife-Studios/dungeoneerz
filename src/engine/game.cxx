@@ -1,3 +1,6 @@
+// Dungeoneerz
+// Copyright(c) 2015 Samuel "MrOverkill" Meyers
+
 #include "dungeoneerz/engine/game.hpp"
 
 #include <cstdlib>
@@ -23,9 +26,9 @@ namespace Dungeoneerz
             this->logger->Log(
                 string("Game"),
                 string("Starting Dungeoneerz ") +
-                to_string(DUNGEON_VERSION) +
+                DUNGEON_VERSION_S +
                 string(".") +
-                to_string(DUNGEON_REVISION) +
+                DUNGEON_REVISION_S +
                 string("...")
             );
 

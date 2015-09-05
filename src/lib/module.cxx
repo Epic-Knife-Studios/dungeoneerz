@@ -30,6 +30,13 @@ namespace Dungeoneerz
 
         }
 
+        void IModule::OnStart()
+        {
+
+            
+
+        }
+
         void IModule::OnStop()
         {
 

@@ -1,3 +1,6 @@
+// Dungeoneerz
+// Copyright(c) 2015 Samuel "MrOverkill" Meyers
+
 #pragma once
 
 // + Configuration
@@ -29,8 +32,6 @@ typedef int StopCode;
 #define GAME_STOP_EVENTUALLY 1
 #define GAME_STOP_SOON 2
 #define GAME_STOP_NOW 3
-
-using std::to_string;
 
 namespace Dungeoneerz
 {

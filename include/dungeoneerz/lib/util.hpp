@@ -9,9 +9,7 @@
 #include <string>
 #include <vector>
 
-#ifndef NON_POSIX
-    #include <unistd.h>
-#endif
+#include <unistd.h>
 
 using std::string;
 using std::vector;
@@ -28,6 +26,7 @@ namespace Dungeoneerz
             bool CharIsNumber(char c);
             int GetNumberOfChar(char c);
             bool CharIsNumeric(char c);
+            bool CharIsWhitespace(char c);
 
             bool StrIsNumeric(string str);
             string StrAsNumber(string str);
